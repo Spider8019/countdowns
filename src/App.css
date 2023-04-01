@@ -6,7 +6,8 @@ body{
 .App{
   width:calc(100% - 2rem);
   padding:1rem;
-  display:flex;
+  display:grid;
+  grid-template-columns: repeat(4, 1fr);
   flex-wrap: wrap;
   gap:1rem;
 }
@@ -21,14 +22,16 @@ body{
 .timer-game>p{
   /* font-size:1rem; */
   color:white;
-  background:red;
   line-height: 1;
   margin: 0;
   font-family:Montserrat;
 }
 .timer-game>.timer{
   line-height: 1;
-  color:aqua;
+  color:red;
   font-weight:600;
   font-size:5rem;
+}
+.timerPlus{
+  color:#33ff14;
 }
