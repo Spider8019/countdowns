@@ -17,6 +17,19 @@ function App() {
     title: "Masturbated Last Time",
     date: new Date("2023-04-01"),
     type: "+"
+  },{
+    title: "Carbonated Drink's Break till",
+    date: new Date("2023-09-21"),
+    type: "-"
+    // clockColor:"red"
+  }, {
+    title: "New year 2024",
+    date: new Date("2024-01-01"),
+    type: "-"
+  }, {
+    title: "Masturbated Last Time",
+    date: new Date("2023-04-01"),
+    type: "+"
   }])
   return (
     <div className="App"

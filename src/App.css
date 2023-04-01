@@ -4,20 +4,20 @@ body{
 
 }
 .App{
-  width:calc(100% - 2rem);
+  width:calc(100%);
   padding:1rem;
   display:grid;
   grid-template-columns: repeat(4, 1fr);
-  flex-wrap: wrap;
-  gap:1rem;
+  /* gap:1rem; */
 }
 .timer-game{
   background:black;
-  width:fit-content;
+  /* width:fit-content; */
   padding:0.5rem;
   margin:0.5rem;
   border-radius:0.5rem;
   height:min-content;
+  /* width: */
 }
 .timer-game>p{
   /* font-size:1rem; */
@@ -27,11 +27,20 @@ body{
   font-family:Montserrat;
 }
 .timer-game>.timer{
-  line-height: 1;
+  /* line-height: 1; */
   color:red;
   font-weight:600;
-  font-size:5rem;
+  font-size:2vw;
 }
 .timerPlus{
   color:#33ff14;
 }
+  @media (max-width:640px) {
+    .App{
+      grid-template-columns: repeat(1, 1fr);  
+    }
+    .timer-game>.timer{
+      font-size:5vh;
+
+    }
+  }

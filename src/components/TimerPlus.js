@@ -23,7 +23,7 @@ const TimerGame = ({ title, date, clockColor }) => {
         className="timer-game timerPlus-game"
     >
         <p>{title}</p>
-        <div className="timer"
+        <div className="truncate timer"
             style={{ color: "#33ff14" }}
             ref={secondsWeHaveRef}
         >+{timeWeHave}</div>
