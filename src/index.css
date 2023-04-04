@@ -8,8 +8,6 @@
     .standardInput {
         @apply p-2 rounded bg-slate-800/[0.3];
     }
-
-    /* ... */
 }
 
 .p-sidebar {
@@ -18,4 +16,8 @@
     border-radius: 1rem 1rem 0 0 !important;
     padding: 1rem !important;
     height: fit-content !important;
+}
+.p-sidebar-mask{
+    background-color: rgba(49, 49, 49, 0.805) !important;
+    /* filter: blur(5px); */
 }

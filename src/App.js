@@ -1,19 +1,21 @@
 import './App.css';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import Timer from "./components/Timer"
 import TimerPlus from './components/TimerPlus';
 import FormInput from './components/FormInput';
 import { allTask } from './api';
 import Navbar from './components/global/Navbar';
+import { useQuery } from 'react-query';
 
 function App() {
   const constraintsRef = useRef(null);
   const [visibleBottom, setVisibleBottom] = useState(false);
-  const [reqs, setReqs] = useState([])
-  useEffect(() => {
-    allTask().then(data => { console.log(data); setReqs(data) })
-      .catch(err => console.log(err))
-  }, [])
+
+  const { isLoading, error, data:reqs } = useQuery('repoData', allTask)
+
+  if (isLoading) return 'Loading...'
+
+  if (error) return 'An error has occurred: ' + error.message
 
   return (
     <React.Fragment>

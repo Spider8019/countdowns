@@ -1,31 +1,33 @@
 import React, { useState } from 'react'
-import axios from "axios"
 import { Sidebar } from 'primereact/sidebar';
+import { addTask } from '../api';
+import { useMutation } from 'react-query';
+import { Button } from 'primereact/button';
 
 const FormInput = ({ visibleBottom, setVisibleBottom }) => {
     const [title, setTitle] = useState("");
     const [date, setDate] = useState(Date.now());
     const [type, setType] = useState("+");
+    const [checked, setChecked] = useState(false)
 
-
-    const addTask = (e) => {
-        e.preventDefault();
-        axios.post("http://localhost:4000/addtask/", {
-            title, date: new Date(date).getTime(), type
-        }).then(function (response) {
-            console.log(response);
-            window.location.reload();
-        })
-            .catch(function (error) {
-                console.log(error);
-            });
-    }
+    const { mutate, isLoading } = useMutation(addTask, {
+        onSuccess: data => {
+            console.log(data);
+            setVisibleBottom(false)
+        },
+        onError: () => {
+            setVisibleBottom(false);
+            alert("there was an error")
+        }
+    });
 
     return (
-        <Sidebar visible={visibleBottom} position="bottom" onHide={() => setVisibleBottom(false)}>
-            {/* <div className='bg-gray-200 p-4 rounded'> */}
+        <Sidebar 
+        blockScroll={true}
+        maskClassName='bg-red-500'
+        visible={visibleBottom} position="bottom" onHide={() => setVisibleBottom(false)}>
             <form>
-                <label className='flex gap-8 my-1'>
+                <label className='items-center flex gap-8 my-1'>
                     <p className='w-[60px]'>
                         Title:
                     </p>
@@ -37,7 +39,7 @@ const FormInput = ({ visibleBottom, setVisibleBottom }) => {
                         onChange={(e) => setTitle(e.target.value)}
                     />
                 </label>
-                <label className='flex gap-8 my-1'>
+                <label className='items-center flex gap-8 my-1'>
                     <p className='w-[60px]'>
                         Date:
                     </p>
@@ -49,7 +51,7 @@ const FormInput = ({ visibleBottom, setVisibleBottom }) => {
                         onChange={(e) => setDate(e.target.value)}
                     />
                 </label>
-                <label className='flex gap-8 my-1'>
+                <label className='items-center flex gap-8 my-1'>
                     <p className='w-[60px]'>
                         Types:
                     </p>
@@ -63,10 +65,24 @@ const FormInput = ({ visibleBottom, setVisibleBottom }) => {
                         <option value="-">-</option>
                     </select>
                 </label>
-                <input
-                    className='bg-red-500 w-full p-2 mt-2 rounded'
-                    onClick={addTask}
-                    type="submit" />
+                <label className='items-center flex gap-8 my-1 mb-4'>
+                    <p className='w-[60px]'>
+                        Public:
+                    </p>
+                    <div
+                        onClick={() => setChecked(!checked)}
+                        className={`rounded ${!checked ? "bg-red-800" : "bg-[#33ff14]"} text-white w-full standardInput`}>
+                        {checked ? "Yes" : "No"}{" - Click to toggle"}
+                    </div>
+                </label>
+                <Button
+                    loading={isLoading}
+                    className='bg-red-800 w-full p-2 rounded'
+                    onClick={() => mutate({
+                        title, date: new Date(date).getTime(), type,
+                        publicTimer:checked
+                    })}
+                    label="Submit" />
             </form>
             {/* </div> */}
         </Sidebar>

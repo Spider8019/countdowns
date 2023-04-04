@@ -6,7 +6,8 @@ const Navbar = ({visibleBottom,setVisibleBottom}) => {
         <div className='p-2 bg-black text-white flex justify-between'>
             <p
             style={{fontFamily:"Kanit",fontWeight:600}}
-            >CD</p>
+            className='text-xl'
+            >CDs</p>
             <Button icon="pi pi-plus" onClick={() => setVisibleBottom(!visibleBottom)} />
         </div>
     )
