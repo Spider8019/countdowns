@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import { Button } from "primereact/button";
 import { deleteTask } from "../api";
 
-const TimerGame = ({ title, date, _id }) => {
+const TimerGame = ({ title, date, _id,refetch }) => {
     const secondsLeftRef = useRef(null)
     const secondsLeft = Math.ceil((date - Date.now()) / 1000);
     const [timeLeft, setTimeLeft] = useState(secondsLeft);
@@ -23,6 +23,7 @@ const TimerGame = ({ title, date, _id }) => {
     const deleteT = (_id) => {
         deleteTask({ _id }).then(data => {
             console.log(data);
+            refetch()
         }).catch(err => console.log(err))
     }
 

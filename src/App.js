@@ -11,7 +11,7 @@ function App() {
   const constraintsRef = useRef(null);
   const [visibleBottom, setVisibleBottom] = useState(false);
 
-  const { isLoading, error, data:reqs } = useQuery('repoData', allTask)
+  const { isLoading, error, data: reqs, refetch } = useQuery('repoData', allTask)
 
   if (isLoading) return 'Loading...'
 
@@ -28,16 +28,19 @@ function App() {
         <FormInput
           visibleBottom={visibleBottom}
           setVisibleBottom={setVisibleBottom}
+          refetch={refetch}
         />
         {reqs.map((item, idx) => {
           if (item.type === "-")
             return (<Timer
               key={idx}
               {...item}
+              refetch={refetch}
             />)
           else return (<TimerPlus
             key={idx}
             {...item}
+            refetch={refetch}
           />)
         })
         }

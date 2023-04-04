@@ -4,7 +4,7 @@ import { addTask } from '../api';
 import { useMutation } from 'react-query';
 import { Button } from 'primereact/button';
 
-const FormInput = ({ visibleBottom, setVisibleBottom }) => {
+const FormInput = ({ visibleBottom, setVisibleBottom,refetch }) => {
     const [title, setTitle] = useState("");
     const [date, setDate] = useState(Date.now());
     const [type, setType] = useState("+");
@@ -14,6 +14,7 @@ const FormInput = ({ visibleBottom, setVisibleBottom }) => {
         onSuccess: data => {
             console.log(data);
             setVisibleBottom(false)
+            refetch();
         },
         onError: () => {
             setVisibleBottom(false);
