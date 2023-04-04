@@ -3,7 +3,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import Timer from "./components/Timer"
 import TimerPlus from './components/TimerPlus';
 import FormInput from './components/FormInput';
-import { allTask, getIp } from './api';
+import { allTask } from './api';
 import Navbar from './components/global/Navbar';
 
 function App() {
@@ -14,9 +14,6 @@ function App() {
     allTask().then(data => { console.log(data); setReqs(data) })
       .catch(err => console.log(err))
   }, [])
-
-  if (reqs.length === 0)
-    return <p className='p-2 text-center text-white-500'>Loading...</p>
 
   return (
     <React.Fragment>
