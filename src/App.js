@@ -6,6 +6,7 @@ import FormInput from './components/FormInput';
 import { allTask } from './api';
 import Navbar from './components/global/Navbar';
 import { useQuery } from 'react-query';
+import { ProgressBar } from 'primereact/progressbar';
 
 function App() {
   const constraintsRef = useRef(null);
@@ -13,7 +14,7 @@ function App() {
 
   const { isLoading, error, data: reqs, refetch } = useQuery('repoData', allTask)
 
-  if (isLoading) return 'Loading...'
+  if (isLoading) return <ProgressBar mode="indeterminate" style={{ height: '6px' }}></ProgressBar>
 
   if (error) return 'An error has occurred: ' + error.message
 
@@ -30,16 +31,18 @@ function App() {
           setVisibleBottom={setVisibleBottom}
           refetch={refetch}
         />
-        {reqs.map((item, idx) => {
+        {[...reqs.yourTasks, ...reqs.publicTasks].map((item, idx) => {
           if (item.type === "-")
             return (<Timer
               key={idx}
               {...item}
+              publicAccess={idx >= reqs.yourTasks.length}
               refetch={refetch}
             />)
           else return (<TimerPlus
             key={idx}
             {...item}
+            publicAccess={idx >= reqs.yourTasks.length}
             refetch={refetch}
           />)
         })

@@ -1,9 +1,8 @@
 import React, { useRef, useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { Button } from "primereact/button";
 import { deleteTask } from "../api";
 
-const TimerGame = ({ title, date, _id,refetch }) => {
+const TimerGame = ({ title, date, _id, refetch, publicAccess }) => {
     const secondsLeftRef = useRef(null)
     const secondsLeft = Math.ceil((date - Date.now()) / 1000);
     const [timeLeft, setTimeLeft] = useState(secondsLeft);
@@ -31,16 +30,19 @@ const TimerGame = ({ title, date, _id,refetch }) => {
         className="bg-black p-2 m-2 rounded flex justify-between items-center"
     >
         <div>
-            <p className="text-white">{title}</p>
+            <p className="text-white">{title}{publicAccess && <i style={{ fontSize: "0.75rem" }} className="ml-2 text-sm pi pi-box"></i>}</p>
             <div className="truncate timerText"
                 ref={secondsLeftRef}
             >-{timeLeft}</div>
         </div>
-        <Button
-            onClick={() => deleteT(_id)}
-            icon="pi pi-times"
-            className="text-gray-800"
-            rounded outlined aria-label="Filter" />
+        {
+            !publicAccess
+            &&
+            <i
+                onClick={() => deleteT(_id)}
+                className="text-gray-800 pi pi-times"
+                aria-label="Filter" />
+        }
     </motion.div>
 
 };

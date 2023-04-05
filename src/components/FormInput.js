@@ -25,7 +25,6 @@ const FormInput = ({ visibleBottom, setVisibleBottom,refetch }) => {
     return (
         <Sidebar 
         blockScroll={true}
-        maskClassName='bg-red-500'
         visible={visibleBottom} position="bottom" onHide={() => setVisibleBottom(false)}>
             <form>
                 <label className='items-center flex gap-8 my-1'>
