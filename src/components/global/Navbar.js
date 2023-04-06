@@ -1,5 +1,4 @@
 import React from 'react'
-import { Button } from 'primereact/button'
 
 const Navbar = ({visibleBottom,setVisibleBottom}) => {
     return (
