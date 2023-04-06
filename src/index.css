@@ -24,3 +24,6 @@
 .p-button{
     background:#991b1b !important;
 }
+.p-skeleton{
+    background:rgb(32, 32, 32) !important; 
+}

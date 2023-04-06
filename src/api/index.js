@@ -42,4 +42,4 @@ const callApiAndReturnDataDlt = async (DATA, URL) => {
 
 export const addTask = (obj) => callApiAndReturnDataPost(obj, "addtask/")
 export const allTask = (obj) => callApiAndReturnDataGet(obj, "alltask/")
-export const deleteTask =(obj) => callApiAndReturnDataDlt(obj, "deletetask/")
+export const deleteTask = (obj) => callApiAndReturnDataDlt(obj, "deletetask/")

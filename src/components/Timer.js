@@ -1,6 +1,8 @@
 import React, { useRef, useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { deleteTask } from "../api";
+import { useMutation } from 'react-query';
+import { Skeleton } from 'primereact/skeleton';
 
 const TimerGame = ({ title, date, _id, refetch, publicAccess }) => {
     const secondsLeftRef = useRef(null)
@@ -19,29 +21,42 @@ const TimerGame = ({ title, date, _id, refetch, publicAccess }) => {
         };
     }, []);
 
-    const deleteT = (_id) => {
-        deleteTask({ _id }).then(data => {
+    const { mutate, isLoading } = useMutation(deleteTask, {
+        onSuccess: data => {
             console.log(data);
             refetch()
-        }).catch(err => console.log(err))
-    }
+        },
+        onError: () => {
+            alert("there was an error")
+        }
+    });
 
     return <motion.div
         className="bg-black p-2 m-2 rounded flex justify-between items-center"
     >
-        <div>
-            <p className="text-white">{title}{publicAccess && <i style={{ fontSize: "0.75rem" }} className="ml-2 text-sm pi pi-box"></i>}</p>
-            <div className="truncate timerText"
-                ref={secondsLeftRef}
-            >-{timeLeft}</div>
-        </div>
-        {
-            !publicAccess
-            &&
-            <i
-                onClick={() => deleteT(_id)}
-                className="text-gray-800 pi pi-times"
-                aria-label="Filter" />
+        {isLoading ?
+            <Skeleton className="bg-sky-500"
+                height="90px"
+            />
+            :
+            <>
+                <div>
+                    <p className="text-white">{title}{publicAccess && <i style={{ fontSize: "0.75rem" }} className="ml-2 text-sm pi pi-box"></i>}</p>
+                    <div className="truncate timerText"
+                        ref={secondsLeftRef}
+                    >-{timeLeft}</div>
+                </div>
+                {
+                    !publicAccess
+                    &&
+                    <i
+                        onClick={() => mutate({
+                            _id
+                        })}
+                        className="text-gray-800 pi pi-times"
+                        aria-label="Filter" />
+                }
+            </>
         }
     </motion.div>
 
