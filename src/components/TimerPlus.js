@@ -2,7 +2,7 @@ import React, { useRef, useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { deleteTask } from "../api";
 
-const TimerGame = ({ title, date, _id, refetch, publicAccess }) => {
+const TimerGame = ({ title, date, _id, refetch, publicAccess, format }) => {
     const secondsWeHaveRef = useRef(null)
     const secondsWeHave = Math.ceil((Date.now() - date) / 1000);
     const [timeWeHave, setTimeWeHave] = useState(secondsWeHave);
@@ -34,13 +34,18 @@ const TimerGame = ({ title, date, _id, refetch, publicAccess }) => {
             <div className="truncate timerText"
                 style={{ color: "#33ff14" }}
                 ref={secondsWeHaveRef}
-            >+{timeWeHave}</div>
+            >+{format === 'seconds'
+                ?
+                `${timeWeHave}`
+                :
+                `${Math.floor(Math.floor(timeWeHave / 60) / 60)}:${Math.floor(timeWeHave / 60) % 60}:${(timeWeHave % 60)}`
+                }</div>
         </div>
         {!publicAccess
             &&
             <i className="pi pi-times text-gray-800"
                 onClick={() => deleteT(_id)}
-                rounded outlined aria-label="Filter" />
+                aria-label="Filter" />
         }
     </motion.div>
 

@@ -4,7 +4,7 @@ import { deleteTask } from "../api";
 import { useMutation } from 'react-query';
 import { Skeleton } from 'primereact/skeleton';
 
-const TimerGame = ({ title, date, _id, refetch, publicAccess }) => {
+const TimerGame = ({ title, date, _id, refetch, publicAccess, format }) => {
     const secondsLeftRef = useRef(null)
     const secondsLeft = Math.ceil((date - Date.now()) / 1000);
     const [timeLeft, setTimeLeft] = useState(secondsLeft);
@@ -32,7 +32,7 @@ const TimerGame = ({ title, date, _id, refetch, publicAccess }) => {
     });
 
     return <motion.div
-        className="bg-black p-2 m-2 rounded flex justify-between items-center"
+        className="bg-black p-2 m-2  flex justify-between items-center"
     >
         {isLoading ?
             <Skeleton className="bg-sky-500"
@@ -41,10 +41,17 @@ const TimerGame = ({ title, date, _id, refetch, publicAccess }) => {
             :
             <>
                 <div>
-                    <p className="text-white">{title}{publicAccess && <i style={{ fontSize: "0.75rem" }} className="ml-2 text-sm pi pi-box"></i>}</p>
+                    <p className="text-white">{title}{publicAccess && <i style={{ fontSize: "0.75rem" }} className="ml-2 text-sm pi pi-box"></i>}{format}</p>
                     <div className="truncate timerText"
                         ref={secondsLeftRef}
-                    >-{timeLeft}</div>
+                    >-
+                        {format === 'seconds'
+                            ? 
+                            `${timeLeft}`
+                            :
+                            `${Math.floor(Math.floor(timeLeft / 60) / 60)}:${Math.floor(timeLeft / 60) % 60}:${(timeLeft % 60)}`
+                        }
+                    </div>
                 </div>
                 {
                     !publicAccess

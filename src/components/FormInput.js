@@ -4,7 +4,7 @@ import { addTask } from '../api';
 import { useMutation } from 'react-query';
 import { Button } from 'primereact/button';
 
-const FormInput = ({ visibleBottom, setVisibleBottom,refetch }) => {
+const FormInput = ({ visibleBottom, setVisibleBottom, refetch }) => {
     const [title, setTitle] = useState("");
     const [date, setDate] = useState(Date.now());
     const [type, setType] = useState("+");
@@ -23,9 +23,9 @@ const FormInput = ({ visibleBottom, setVisibleBottom,refetch }) => {
     });
 
     return (
-        <Sidebar 
-        blockScroll={true}
-        visible={visibleBottom} position="bottom" onHide={() => setVisibleBottom(false)}>
+        <Sidebar
+            blockScroll={true}
+            visible={visibleBottom} position="bottom" onHide={() => setVisibleBottom(false)}>
             <form>
                 <label className='items-center flex gap-8 my-1'>
                     <p className='w-[60px]'>
@@ -71,16 +71,16 @@ const FormInput = ({ visibleBottom, setVisibleBottom,refetch }) => {
                     </p>
                     <div
                         onClick={() => setChecked(!checked)}
-                        className={`rounded ${!checked ? "bg-red-800" : "bg-[#33ff14]"} text-white w-full standardInput`}>
+                        className={` ${!checked ? "bg-red-800" : "bg-[#33ff14]"} text-white w-full standardInput`}>
                         {checked ? "Yes" : "No"}{" - Click to toggle"}
                     </div>
                 </label>
                 <Button
                     loading={isLoading}
-                    className='bg-red-800 w-full p-2 rounded'
+                    className='bg-red-800 w-full p-2 '
                     onClick={() => mutate({
                         title, date: new Date(date).getTime(), type,
-                        publicTimer:checked
+                        publicTimer: checked
                     })}
                     label="Submit" />
             </form>
