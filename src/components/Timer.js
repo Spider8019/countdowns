@@ -41,7 +41,7 @@ const TimerGame = ({ title, date, _id, refetch, publicAccess, format }) => {
             :
             <>
                 <div>
-                    <p className="text-white">{title}{publicAccess && <i style={{ fontSize: "0.75rem" }} className="ml-2 text-sm pi pi-box"></i>}{format}</p>
+                    <p className="text-white">{title}{publicAccess && <i style={{ fontSize: "0.75rem" }} className="ml-2 text-sm pi pi-box"></i>}</p>
                     <div className="truncate timerText"
                         ref={secondsLeftRef}
                     >-
