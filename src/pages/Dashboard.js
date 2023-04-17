@@ -9,29 +9,29 @@ import { useSelector } from 'react-redux';
 
 function Dashboard() {
   const constraintsRef = useRef(null);
-  const {global}=useSelector(state=>state)
-  
+  const { global } = useSelector(state => state)
+
   const [selectedId, setSelectedId] = useState(null)
 
   const { isLoading, error, data: reqs, refetch } = useQuery('repoData', allTask)
   if (isLoading) return <ProgressBar mode="indeterminate" style={{ height: '6px' }}></ProgressBar>
 
   if (error) return 'An error has occurred: ' + error.message
-console.log(reqs)
+  console.log(reqs)
   return (
     <div
       className='relative'
     >
-
+      adfas
       <div className="App mt-2 px-2"
         ref={constraintsRef}
       >
-       adfas
         {[...reqs.yourTasks, ...reqs.publicTasks].sort(function (a, b) {
           return a.date - b.date;
         }).map((item, idx) => {
           if (item.type === "-")
             return (<Timer
+              key={idx}
               index={idx}
               {...item}
               format={global.format}
@@ -41,6 +41,7 @@ console.log(reqs)
             />)
           else return (<TimerPlus
             index={idx}
+            key={idx}
             {...item}
             format={global.format}
             publicAccess={item.ipaddress === '0.0.0.0/0'}

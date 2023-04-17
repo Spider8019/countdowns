@@ -2,7 +2,6 @@ import React from "react"
 
 const Dashboard = React.lazy(() => import("../pages/Dashboard"))
 const FullScreen = React.lazy(() => import("../pages/Fullscreen"))
-
 // const PageNotFound = React.lazy(() => import("../pages/404"))
 
 export const routesList = {
