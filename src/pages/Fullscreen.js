@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { Knob } from 'primereact/knob';
 
 const Fullscreen = () => {
-    const [value, setValue] = useState(Date.now());
+    // const [value, setValue] = useState(Date.now());
     const secondsLeftRef = useRef(null)
     const secondsLeft = Math.ceil((1681773000000 - Date.now()) / 1000);
     const [timeLeft, setTimeLeft] = useState(secondsLeft);
