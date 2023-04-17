@@ -22,7 +22,6 @@ function Dashboard() {
     <div
       className='relative'
     >
-      adfas
       <div className="App mt-2 px-2"
         ref={constraintsRef}
       >
