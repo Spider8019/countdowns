@@ -11,7 +11,6 @@ const MainLayout = () => {
                 {
                     <main className={``}>
                         <Suspense fallback={<DefaultLoader />}>
-                            {localStorage.getItem("token") &&
                                 <Routes>
                                     {ListOfRoutes.map((route, index) => {
                                         return (
@@ -30,8 +29,7 @@ const MainLayout = () => {
                                         )
                                     })}
                                 </Routes>
-                            }
-                        </Suspense>
+\                        </Suspense>
                     </main>
                 }
             </div>
