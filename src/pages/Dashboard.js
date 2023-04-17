@@ -17,7 +17,7 @@ function Dashboard() {
   if (isLoading) return <ProgressBar mode="indeterminate" style={{ height: '6px' }}></ProgressBar>
 
   if (error) return 'An error has occurred: ' + error.message
-
+console.log(reqs)
   return (
     <div
       className='relative'
@@ -26,7 +26,7 @@ function Dashboard() {
       <div className="App mt-2 px-2"
         ref={constraintsRef}
       >
-       
+       adfas
         {[...reqs.yourTasks, ...reqs.publicTasks].sort(function (a, b) {
           return a.date - b.date;
         }).map((item, idx) => {
