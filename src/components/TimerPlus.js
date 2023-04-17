@@ -40,7 +40,7 @@ const TimerGame = ({ title, date, _id, refetch, publicAccess, format, index, set
                 ?
                 `${timeWeHave}`
                 :
-                `${Math.floor((Math.floor(Math.floor(timeWeHave / 60) / 60))/24)}:${Math.floor(Math.floor(timeWeHave / 60) % 60)}:${Math.floor(timeWeHave / 60) % 60}:${(timeWeHave % 60)}`
+                `${Math.floor(timeWeHave / (3600 * 24))}:${Math.floor(timeWeHave % (3600 * 24) / 3600)}:${Math.floor(timeWeHave % 3600 / 60)}:${Math.floor(timeWeHave % 60)}`
                 }</div>
         </motion.div>
         {!publicAccess
