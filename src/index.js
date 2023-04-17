@@ -5,16 +5,21 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import "primereact/resources/primereact.min.css";
 import "primeicons/primeicons.css";
-import "primereact/resources/themes/lara-light-indigo/theme.css";     
+import "primereact/resources/themes/lara-light-indigo/theme.css";
 import { QueryClient, QueryClientProvider } from 'react-query'
+import { store } from "./store"
+import { Provider } from "react-redux"
+
 
 const queryClient = new QueryClient()
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <QueryClientProvider client={queryClient}>
-    <App />
-  </QueryClientProvider>
+  <Provider store={store}>
+    <QueryClientProvider client={queryClient}>
+      <App />
+    </QueryClientProvider>
+  </Provider>
 );
 
 // If you want to start measuring performance in your app, pass a function

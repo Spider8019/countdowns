@@ -2,7 +2,7 @@ import React, { useRef, useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { deleteTask } from "../api";
 
-const TimerGame = ({ title, date, _id, refetch, publicAccess, format }) => {
+const TimerGame = ({ title, date, _id, refetch, publicAccess, format, index, setSelectedId }) => {
     const secondsWeHaveRef = useRef(null)
     const secondsWeHave = Math.ceil((Date.now() - date) / 1000);
     const [timeWeHave, setTimeWeHave] = useState(secondsWeHave);
@@ -29,7 +29,9 @@ const TimerGame = ({ title, date, _id, refetch, publicAccess, format }) => {
     return <motion.div
         className="bg-black p-2 m-2 rounded flex justify-between items-center"
     >
-        <div className="">
+        <motion.div
+            onClick={() => setSelectedId(index)}
+            className="">
             <p className="text-white">{title}{publicAccess && <span className="text-sm">Public</span>}</p>
             <div className="truncate timerText"
                 style={{ color: "#33ff14" }}
@@ -38,9 +40,9 @@ const TimerGame = ({ title, date, _id, refetch, publicAccess, format }) => {
                 ?
                 `${timeWeHave}`
                 :
-                `${Math.floor(Math.floor(timeWeHave / 60) / 60)}:${Math.floor(timeWeHave / 60) % 60}:${(timeWeHave % 60)}`
+                `${Math.floor((Math.floor(Math.floor(timeWeHave / 60) / 60))/24)}:${Math.floor(Math.floor(timeWeHave / 60) % 60)}:${Math.floor(timeWeHave / 60) % 60}:${(timeWeHave % 60)}`
                 }</div>
-        </div>
+        </motion.div>
         {!publicAccess
             &&
             <i className="pi pi-times text-gray-800"

@@ -1,63 +1,32 @@
+import React, { Suspense, useState } from 'react'
+import { BrowserRouter as Router, Routes, Route, } from "react-router-dom";
+import MainRoutes from './routes/MainRoutes';
+import DefaultLoader from './components/loaders/DefaultLoader';
+import Login from './pages/Login';
 import './App.css';
-import React, { useRef, useState } from 'react';
-import Timer from "./components/Timer"
-import TimerPlus from './components/TimerPlus';
-import FormInput from './components/FormInput';
-import { allTask } from './api';
 import Navbar from './components/global/Navbar';
-import { useQuery } from 'react-query';
-import { ProgressBar } from 'primereact/progressbar';
+import { useSelector } from 'react-redux';
 
-function App() {
-  const constraintsRef = useRef(null);
+
+const AllRoutes = () => {
   const [visibleBottom, setVisibleBottom] = useState(false);
-  const [format, setFormat] = useState('seconds')
-
-  const { isLoading, error, data: reqs, refetch } = useQuery('repoData', allTask)
-  if (isLoading) return <ProgressBar mode="indeterminate" style={{ height: '6px' }}></ProgressBar>
-
-  if (error) return 'An error has occurred: ' + error.message
-
+  // const [format, setFormat] = useState('seconds')
+  const ste=useSelector(state=>state.format)
+  console.log(ste)
   return (
-    <React.Fragment>
+    <Router>
       <Navbar
         visibleBottom={visibleBottom}
         setVisibleBottom={setVisibleBottom}
-        format={format}
-        setFormat={setFormat}
       />
-      <div className="App mt-2 px-2"
-        ref={constraintsRef}
-      >
-        <FormInput
-          visibleBottom={visibleBottom}
-          setVisibleBottom={setVisibleBottom}
-          refetch={refetch}
-        />
-        {[...reqs.yourTasks, ...reqs.publicTasks].sort(function (a, b) {
-          return a.date - b.date;
-        }).map((item, idx) => {
-          if (item.type === "-")
-            return (<Timer
-              key={idx}
-              {...item}
-              format={format}
-              publicAccess={item.ipaddress === '0.0.0.0/0'}
-              refetch={refetch}
-            />)
-          else return (<TimerPlus
-            key={idx}
-            {...item}
-            format={format}
-            publicAccess={item.ipaddress === '0.0.0.0/0'}
-            refetch={refetch}
-          />)
-        })
-        }
-      </div>
-    </React.Fragment>
-
-  );
+      <Suspense fallback={<DefaultLoader />}>
+        <Routes>
+          <Route path="/login" element={<Login />} />
+          <Route path="*" element={<MainRoutes />} />
+        </Routes>
+      </Suspense>
+    </Router>
+  )
 }
 
-export default App;
+export default AllRoutes

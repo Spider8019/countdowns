@@ -29,6 +29,10 @@ body {
   font-size: 2vw;
 }
 
+.p-knob-text{
+  display: none !important;
+}
+
 @media (max-width:640px) {
   .App {
     grid-template-columns: repeat(1, 1fr);

@@ -4,7 +4,7 @@ import { deleteTask } from "../api";
 import { useMutation } from 'react-query';
 import { Skeleton } from 'primereact/skeleton';
 
-const TimerGame = ({ title, date, _id, refetch, publicAccess, format }) => {
+const TimerGame = ({ title, date, _id, refetch, publicAccess, format, setSelectedId, index }) => {
     const secondsLeftRef = useRef(null)
     const secondsLeft = Math.ceil((date - Date.now()) / 1000);
     const [timeLeft, setTimeLeft] = useState(secondsLeft);
@@ -40,19 +40,21 @@ const TimerGame = ({ title, date, _id, refetch, publicAccess, format }) => {
             />
             :
             <>
-                <div>
+                <motion.div
+                    onClick={() => setSelectedId(index)}
+                >
                     <p className="text-white">{title}{publicAccess && <i style={{ fontSize: "0.75rem" }} className="ml-2 text-sm pi pi-box"></i>}</p>
                     <div className="truncate timerText"
                         ref={secondsLeftRef}
                     >-
                         {format === 'seconds'
-                            ? 
+                            ?
                             `${timeLeft}`
                             :
-                            `${Math.floor(Math.floor(timeLeft / 60) / 60)}:${Math.floor(timeLeft / 60) % 60}:${(timeLeft % 60)}`
+                            `${Math.floor((Math.floor(Math.floor(timeLeft / 60) / 60))/24)}:${Math.floor(Math.floor(timeLeft / 60) % 60)}:${Math.floor(timeLeft / 60) % 60}:${(timeLeft % 60)}`
                         }
                     </div>
-                </div>
+                </motion.div>
                 {
                     !publicAccess
                     &&
