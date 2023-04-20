@@ -14,7 +14,6 @@ function Dashboard() {
     dispatch(TimerThunks.getTimers())
   }, [])
 
-  const [selectedId, setSelectedId] = useState(null)
 
 
   if (timers.isLoading) return <ProgressBar mode="indeterminate" style={{ height: '6px' }}></ProgressBar>
@@ -38,7 +37,6 @@ function Dashboard() {
               {...item}
               format={global.format}
               publicAccess={item.ipaddress === '0.0.0.0/0'}
-              setSelectedId={setSelectedId}
             />)
           else return (<TimerPlus
             index={idx}
@@ -46,7 +44,6 @@ function Dashboard() {
             {...item}
             format={global.format}
             publicAccess={item.ipaddress === '0.0.0.0/0'}
-            setSelectedId={setSelectedId}
           />)
         })
         }

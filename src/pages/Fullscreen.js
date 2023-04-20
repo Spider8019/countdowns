@@ -9,7 +9,7 @@ const Fullscreen = () => {
     const secondsLeftRef = useRef(null)
     const [data] = useSelector(state => state.timers.timers.filter(item => item._id === searchParams.get('_id')))
     console.log(data)
-    const secondsLeft = Math.ceil((data.date - new Date(data.createdAt).getTime()) / 1000);
+    const secondsLeft = Math.ceil((data.date - Date.now()) / 1000);
     const [timeLeft, setTimeLeft] = useState(secondsLeft);
     console.log(data)
     useEffect(() => {
@@ -34,7 +34,7 @@ const Fullscreen = () => {
                     className='mx-auto grid place-items-center'
                 >
                     <Knob
-                        value={(timeLeft / secondsLeft) * 100}
+                        value={((timeLeft * 1000) / (data.date - new Date(data.createdAt).getTime())) * 100}
                         strokeWidth={4}
                         size={300}
                         valueColor="red"
@@ -42,7 +42,7 @@ const Fullscreen = () => {
                 </div>
                 <div className='text-center text-white'>
                     <p className='text-3xl font-semibold'>{data.title}</p>
-                    <p className='text-5xl w-screen'>{timeLeft} <i className="pi pi-arrow-right-arrow-left"></i> {("0"+Math.floor(timeLeft / (3600 * 24)).toString()).slice(-2)}:{("0"+Math.floor(timeLeft % (3600 * 24) / 3600)).toString().slice(-2)}:{("0"+Math.floor(timeLeft % 3600 / 60).toString()).slice(-2)}:{("0"+Math.floor(timeLeft % 60).toString()).slice(-2)}</p>
+                    <p className='sm:text-5xl text-[red] text-xl w-screen'>{timeLeft} <i className="pi pi-arrow-right-arrow-left"></i> {("0" + Math.floor(timeLeft / (3600 * 24)).toString()).slice(-2)}:{("0" + Math.floor(timeLeft % (3600 * 24) / 3600)).toString().slice(-2)}:{("0" + Math.floor(timeLeft % 3600 / 60).toString()).slice(-2)}:{("0" + Math.floor(timeLeft % 60).toString()).slice(-2)}</p>
                 </div>
             </div>
         </div>

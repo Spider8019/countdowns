@@ -1,8 +1,9 @@
 import React from 'react'
+import { ProgressBar } from 'primereact/progressbar'
 
 const DefaultLoader = () => {
   return (
-    <div>DefaultLoader</div>
+    <ProgressBar mode="indeterminate" style={{ height: '6px' }}></ProgressBar>
   )
 }
 
