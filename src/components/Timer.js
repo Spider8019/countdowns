@@ -3,9 +3,11 @@ import { motion } from "framer-motion";
 import { deleteTask } from "../api";
 import { useMutation } from 'react-query';
 import { Skeleton } from 'primereact/skeleton';
+import { useNavigate } from "react-router-dom";
 
-const TimerGame = ({ title, date, _id, refetch, publicAccess, format, setSelectedId, index }) => {
+const TimerGame = ({ title, date, _id, publicAccess, format, index }) => {
     const secondsLeftRef = useRef(null)
+    const navigate = useNavigate();
     const secondsLeft = Math.ceil((date - Date.now()) / 1000);
     const [timeLeft, setTimeLeft] = useState(secondsLeft);
     useEffect(() => {
@@ -24,7 +26,7 @@ const TimerGame = ({ title, date, _id, refetch, publicAccess, format, setSelecte
     const { mutate, isLoading } = useMutation(deleteTask, {
         onSuccess: data => {
             console.log(data);
-            refetch()
+            window.location.reload()
         },
         onError: () => {
             alert("there was an error")
@@ -41,7 +43,7 @@ const TimerGame = ({ title, date, _id, refetch, publicAccess, format, setSelecte
             :
             <>
                 <motion.div
-                    onClick={() => setSelectedId(index)}
+                    onClick={() => navigate("/fullscreen?_id="+_id)}
                 >
                     <p className="text-white">{title}{publicAccess && <i style={{ fontSize: "0.75rem" }} className="ml-2 text-sm pi pi-box"></i>}</p>
                     <div className="truncate timerText"
@@ -51,7 +53,7 @@ const TimerGame = ({ title, date, _id, refetch, publicAccess, format, setSelecte
                             ?
                             `${timeLeft}`
                             :
-                            `${Math.floor(timeLeft / (3600*24))}:${Math.floor(timeLeft % (3600*24) / 3600)}:${Math.floor(timeLeft % 3600 / 60)}:${Math.floor(timeLeft % 60)}`
+                            `${Math.floor(timeLeft / (3600 * 24))}:${Math.floor(timeLeft % (3600 * 24) / 3600)}:${Math.floor(timeLeft % 3600 / 60)}:${Math.floor(timeLeft % 60)}`
                         }
                     </div>
                 </motion.div>

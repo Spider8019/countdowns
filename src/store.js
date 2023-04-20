@@ -1,5 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
 import global from "./redux/slices/global";
+import timers from "./redux/slices/timers";
 import storageSession from "redux-persist/lib/storage";
 import { persistReducer, persistStore, FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER, } from 'redux-persist';
 import { combineReducers } from "redux"
@@ -13,6 +14,7 @@ const persistConfig = {
 
 const reducers = combineReducers({
     global,
+    timers
 });
 
 const persistedReducer = persistReducer(persistConfig, reducers);

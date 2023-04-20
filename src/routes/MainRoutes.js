@@ -7,32 +7,30 @@ const MainLayout = () => {
 
     return (
         <React.Fragment>
-            <div className="flex-col min-h-full">
-                {
-                    <main className={``}>
-                        <Suspense fallback={<DefaultLoader />}>
-                                <Routes>
-                                    {ListOfRoutes.map((route, index) => {
-                                        return (
-                                                
-                                                <Route
-                                                    key={index}
-                                                    path={route.path}
-                                                    element={<route.element />}
-                                                />
-                                                // :
-                                                // <Route
-                                                //     key={index}
-                                                //     path={route.path}
-                                                //     element={<PageNotFound />}
-                                                // />
-                                        )
-                                    })}
-                                </Routes>
-\                        </Suspense>
-                    </main>
-                }
-            </div>
+            {
+                <main>
+                    <Suspense fallback={<DefaultLoader />}>
+                        <Routes>
+                            {ListOfRoutes.map((route, index) => {
+                                return (
+
+                                    <Route
+                                        key={index}
+                                        path={route.path}
+                                        element={<route.element />}
+                                    />
+                                    // :
+                                    // <Route
+                                    //     key={index}
+                                    //     path={route.path}
+                                    //     element={<PageNotFound />}
+                                    // />
+                                )
+                            })}
+                        </Routes>
+                    </Suspense>
+                </main>
+            }
         </React.Fragment >
     )
 }

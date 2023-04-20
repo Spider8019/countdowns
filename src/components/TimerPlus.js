@@ -1,9 +1,11 @@
 import React, { useRef, useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { deleteTask } from "../api";
+// import { useNavigate } from "react-router-dom";
 
-const TimerGame = ({ title, date, _id, refetch, publicAccess, format, index, setSelectedId }) => {
+const TimerGame = ({ title, date, _id, publicAccess, format }) => {
     const secondsWeHaveRef = useRef(null)
+    // const navigate = useNavigate();
     const secondsWeHave = Math.ceil((Date.now() - date) / 1000);
     const [timeWeHave, setTimeWeHave] = useState(secondsWeHave);
     useEffect(() => {
@@ -22,7 +24,7 @@ const TimerGame = ({ title, date, _id, refetch, publicAccess, format, index, set
     const deleteT = (_id) => {
         deleteTask({ _id }).then(data => {
             console.log(data);
-            refetch();
+            window.location.reload();
         }).catch(err => console.log(err))
     }
 
@@ -30,7 +32,7 @@ const TimerGame = ({ title, date, _id, refetch, publicAccess, format, index, set
         className="bg-black p-2 m-2 rounded flex justify-between items-center"
     >
         <motion.div
-            onClick={() => setSelectedId(index)}
+            // onClick={() => navigate("/fullscreen?_id=" + _id)}
             className="">
             <p className="text-white">{title}{publicAccess && <span className="text-sm">Public</span>}</p>
             <div className="truncate timerText"
