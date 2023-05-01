@@ -9,7 +9,7 @@ const Fullscreen = () => {
     const secondsLeftRef = useRef(null)
     const [data] = useSelector(state => state.timers.timers.filter(item => item._id === searchParams.get('_id')))
     console.log(data)
-    const secondsLeft = Math.ceil((data.date - Date.now()) / 1000);
+    const secondsLeft = Math.ceil((data.date[0] - Date.now()) / 1000);
     const [timeLeft, setTimeLeft] = useState(secondsLeft);
     console.log(data)
     useEffect(() => {

@@ -1,12 +1,13 @@
 import React, { useRef, useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { deleteTask } from "../api";
-// import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
-const TimerGame = ({ title, date, _id, publicAccess, format }) => {
+const TimerGame = ({ title, date, _id, format }) => {
     const secondsWeHaveRef = useRef(null)
-    // const navigate = useNavigate();
-    const secondsWeHave = Math.ceil((Date.now() - date) / 1000);
+    const navigate = useNavigate();
+    console.log(date)
+    const secondsWeHave = Math.ceil((Date.now() - date[date.length-1]) / 1000);
     const [timeWeHave, setTimeWeHave] = useState(secondsWeHave);
     useEffect(() => {
         secondsWeHaveRef.current = setInterval(() => {
@@ -32,9 +33,9 @@ const TimerGame = ({ title, date, _id, publicAccess, format }) => {
         className="bg-black p-2 m-2 rounded flex justify-between items-center"
     >
         <motion.div
-            // onClick={() => navigate("/fullscreen?_id=" + _id)}
+            onClick={() => navigate("/fullscreenplus?_id=" + _id)}
             className="">
-            <p className="text-white">{title}{publicAccess && <span className="text-sm">Public</span>}</p>
+            <p className="text-white">{title}</p>
             <div className="truncate timerText"
                 style={{ color: "#33ff14" }}
                 ref={secondsWeHaveRef}
@@ -45,12 +46,9 @@ const TimerGame = ({ title, date, _id, publicAccess, format }) => {
                 `${Math.floor(timeWeHave / (3600 * 24))}:${Math.floor(timeWeHave % (3600 * 24) / 3600)}:${Math.floor(timeWeHave % 3600 / 60)}:${Math.floor(timeWeHave % 60)}`
                 }</div>
         </motion.div>
-        {!publicAccess
-            &&
-            <i className="pi pi-times text-gray-800"
-                onClick={() => deleteT(_id)}
-                aria-label="Filter" />
-        }
+        <i className="pi pi-times text-gray-800"
+            onClick={() => deleteT(_id)}
+            aria-label="Filter" />
     </motion.div>
 
 };

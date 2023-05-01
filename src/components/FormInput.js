@@ -8,7 +8,7 @@ const FormInput = ({ visibleBottom, setVisibleBottom }) => {
     const [title, setTitle] = useState("");
     const [date, setDate] = useState(Date.now());
     const [type, setType] = useState("+");
-    const [checked, setChecked] = useState(false)
+    // const [checked, setChecked] = useState(false)
 
     const { mutate, isLoading } = useMutation(addTask, {
         onSuccess: data => {
@@ -52,7 +52,7 @@ const FormInput = ({ visibleBottom, setVisibleBottom }) => {
                         onChange={(e) => setDate(e.target.value)}
                     />
                 </label>
-                <label className='items-center flex gap-8 my-1'>
+                <label className='items-center flex gap-8 my-1 mb-4'>
                     <p className='w-[60px]'>
                         Types:
                     </p>
@@ -66,7 +66,7 @@ const FormInput = ({ visibleBottom, setVisibleBottom }) => {
                         <option value="-">-</option>
                     </select>
                 </label>
-                <label className='items-center flex gap-8 my-1 mb-4'>
+                {/* <label className='items-center flex gap-8 my-1 mb-4'>
                     <p className='w-[60px]'>
                         Public:
                     </p>
@@ -75,13 +75,13 @@ const FormInput = ({ visibleBottom, setVisibleBottom }) => {
                         className={` ${!checked ? "bg-red-800" : "bg-[#33ff14]"} text-white w-full standardInput`}>
                         {checked ? "Yes" : "No"}{" - Click to toggle"}
                     </div>
-                </label>
+                </label> */}
                 <Button
                     loading={isLoading}
-                    className='bg-red-800 w-full p-2 '
+                    className='bg-red-800 w-full p-2 mt-4'
                     onClick={() => mutate({
-                        title, date: new Date(date).getTime(), type,
-                        publicTimer: checked
+                        title, date: [new Date(date).getTime()], type,
+                        // publicTimer: checked
                     })}
                     label="Submit" />
             </form>

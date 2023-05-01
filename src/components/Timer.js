@@ -5,10 +5,12 @@ import { useMutation } from 'react-query';
 import { Skeleton } from 'primereact/skeleton';
 import { useNavigate } from "react-router-dom";
 
-const TimerGame = ({ title, date, _id, publicAccess, format, index }) => {
+const TimerGame = ({ title, date, _id, format, index }) => {
+    console.log(date,
+        "guru randhawa")
     const secondsLeftRef = useRef(null)
     const navigate = useNavigate();
-    const secondsLeft = Math.ceil((date - Date.now()) / 1000);
+    const secondsLeft = Math.ceil((date[0] - Date.now()) / 1000);
     const [timeLeft, setTimeLeft] = useState(secondsLeft);
     useEffect(() => {
         secondsLeftRef.current = setInterval(() => {
@@ -43,9 +45,9 @@ const TimerGame = ({ title, date, _id, publicAccess, format, index }) => {
             :
             <>
                 <motion.div
-                    onClick={() => navigate("/fullscreen?_id="+_id)}
+                    onClick={() => navigate("/fullscreen?_id=" + _id)}
                 >
-                    <p className="text-white">{title}{publicAccess && <i style={{ fontSize: "0.75rem" }} className="ml-2 text-sm pi pi-box"></i>}</p>
+                    <p className="text-white">{title}</p>
                     <div className="truncate timerText"
                         ref={secondsLeftRef}
                     >-
@@ -57,16 +59,12 @@ const TimerGame = ({ title, date, _id, publicAccess, format, index }) => {
                         }
                     </div>
                 </motion.div>
-                {
-                    !publicAccess
-                    &&
-                    <i
-                        onClick={() => mutate({
-                            _id
-                        })}
-                        className="text-gray-800 pi pi-times"
-                        aria-label="Filter" />
-                }
+                <i
+                    onClick={() => mutate({
+                        _id
+                    })}
+                    className="text-gray-800 pi pi-times"
+                    aria-label="Filter" />
             </>
         }
     </motion.div>

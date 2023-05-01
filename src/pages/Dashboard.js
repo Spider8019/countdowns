@@ -1,10 +1,9 @@
 import Timer from "../components/Timer"
 import TimerPlus from '../components/TimerPlus';
 import { ProgressBar } from 'primereact/progressbar';
-import { motion, AnimatePresence } from "framer-motion"
 import { useDispatch, useSelector } from 'react-redux';
 import { TimerThunks } from '../redux/thunks/timer';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 
 function Dashboard() {
   const constraintsRef = useRef(null);
@@ -36,14 +35,12 @@ function Dashboard() {
               index={idx}
               {...item}
               format={global.format}
-              publicAccess={item.ipaddress === '0.0.0.0/0'}
             />)
           else return (<TimerPlus
             index={idx}
             key={idx}
             {...item}
             format={global.format}
-            publicAccess={item.ipaddress === '0.0.0.0/0'}
           />)
         })
         }
