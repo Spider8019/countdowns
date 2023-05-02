@@ -50,7 +50,8 @@ const FullscreenPlus = () => {
       textStyle: { color: '#FFF' }
     },
     vAxis: {
-      textStyle: { color: "#fff" }
+      textStyle: { color: "#fff" },
+
     },
     titleTextStyle: {
       color: "#fff"
@@ -61,7 +62,8 @@ const FullscreenPlus = () => {
     series: {
       0: { color: '#000' },
       1: { color: '#ff0084' },
-    }
+    },
+    bar: { groupWidth: '100%' },
   };
   return (
     <div className=' grid place-items-center gap-8 justify-center items-center'
@@ -73,10 +75,10 @@ const FullscreenPlus = () => {
         >
           <Chart
             options={options}
-            chartType="ColumnChart" 
-            width="400px" 
-            height="400px" 
-            data={[["I", "II", { role: "style" }], ...data.date.slice(0, -1).map((item, idx) => { return [idx, item, "#33ff14"] }), [data.date.length, timeWeHave, "#33ff14"]]} />
+            chartType="ColumnChart"
+            width="400px"
+            height="400px"
+            data={[["I", "II", { role: "style" }], ...data.date.slice(0, -1).map((item, idx) => { return [idx, item, "#33ff14"] }), [data.date.length-1, timeWeHave, "#33ff14"]]} />
         </div>
         <div className='text-center text-white'>
           <p className='text-3xl font-semibold'>{data.title}</p>
