@@ -39,6 +39,13 @@ const FullscreenPlus = () => {
     }
   });
 
+  const avgSales = 20000;
+
+  // data
+  //   .slice(1) // remove the header row
+  //   .map((row) => row[1]) // get the sales values
+  //   .reduce((total, value) => total + value, 0) / data.length - 1; // c
+
   const options = {
     title: "Seconds",
     curveType: "function",
@@ -78,7 +85,7 @@ const FullscreenPlus = () => {
             chartType="ColumnChart"
             width="400px"
             height="400px"
-            data={[["I", "II", { role: "style" }], ...data.date.slice(0, -1).map((item, idx) => { return [idx, item, "#33ff14"] }), [data.date.length-1, timeWeHave, "#33ff14"]]} />
+            data={[["I", "II", { role: "style" }], ...data.date.slice(0, -1).map((item, idx) => { return [idx, item, "#33ff14"] }), [data.date.length - 1, timeWeHave, "#33ff14"], [data.date.length, (data.date.slice(0, -1).reduce((total, num) => total + num,0) + timeWeHave) / data.date.length, "#6366f1"]]} />
         </div>
         <div className='text-center text-white'>
           <p className='text-3xl font-semibold'>{data.title}</p>
