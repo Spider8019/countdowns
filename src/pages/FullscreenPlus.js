@@ -5,6 +5,7 @@ import { Button } from 'primereact/button';
 import { Chart } from "react-google-charts";
 import { useNavigate, useSearchParams } from 'react-router-dom'
 import React, { useState, useRef, useEffect } from 'react';
+import { convertSecondsToDayFormat } from '../tools';
 
 const FullscreenPlus = () => {
   // const [value, setValue] = useState(Date.now());
@@ -39,8 +40,6 @@ const FullscreenPlus = () => {
     }
   });
 
-  const avgSales = 20000;
-
   // data
   //   .slice(1) // remove the header row
   //   .map((row) => row[1]) // get the sales values
@@ -72,6 +71,9 @@ const FullscreenPlus = () => {
     },
     bar: { groupWidth: '100%' },
   };
+
+  const avgValues=(data.date.slice(0, -1).reduce((total, num) => total + num,0) + timeWeHave) / data.date.length;
+
   return (
     <div className=' grid place-items-center gap-8 justify-center items-center'
       style={{ height: "calc(100vh - 44px)" }}
@@ -85,12 +87,13 @@ const FullscreenPlus = () => {
             chartType="ColumnChart"
             width="400px"
             height="400px"
-            data={[["I", "II", { role: "style" }], ...data.date.slice(0, -1).map((item, idx) => { return [idx, item, "#33ff14"] }), [data.date.length - 1, timeWeHave, "#33ff14"], [data.date.length, (data.date.slice(0, -1).reduce((total, num) => total + num,0) + timeWeHave) / data.date.length, "#6366f1"]]} />
+            data={[["I", "II", { role: "style" }], ...data.date.slice(0, -1).map((item, idx) => { return [idx, item, "#33ff14"] }), [data.date.length - 1, timeWeHave, "#33ff14"], [data.date.length, avgValues, "#6366f1"]]} />
         </div>
         <div className='text-center text-white'>
           <p className='text-3xl font-semibold'>{data.title}</p>
-          <p className='sm:text-5xl text-[#33ff14] text-xl w-screen'>{timeWeHave} <i className="pi pi-arrow-right-arrow-left"></i> {("0" + Math.floor(timeWeHave / (3600 * 24)).toString()).slice(-2)}:{("0" + Math.floor(timeWeHave % (3600 * 24) / 3600)).toString().slice(-2)}:{("0" + Math.floor(timeWeHave % 3600 / 60).toString()).slice(-2)}:{("0" + Math.floor(timeWeHave % 60).toString()).slice(-2)}</p>
+          <p className='sm:text-5xl text-[#33ff14] text-xl w-screen'>{timeWeHave} <i className="pi pi-arrow-right-arrow-left"></i> {convertSecondsToDayFormat(timeWeHave)}</p>
         </div>
+        <p className='text-center text-white'>Average Value <br/> {avgValues.toFixed(2)} <i className="pi pi-arrow-right-arrow-left"></i> {convertSecondsToDayFormat(avgValues)}</p>
         <div className='flex justify-center gap-4 mt-4'>
           <Button
             loading={isLoading}
