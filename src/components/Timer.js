@@ -6,8 +6,6 @@ import { Skeleton } from 'primereact/skeleton';
 import { useNavigate } from "react-router-dom";
 
 const TimerGame = ({ title, date, _id, format, index }) => {
-    console.log(date,
-        "guru randhawa")
     const secondsLeftRef = useRef(null)
     const navigate = useNavigate();
     const secondsLeft = Math.ceil((date[0] - Date.now()) / 1000);
@@ -27,7 +25,6 @@ const TimerGame = ({ title, date, _id, format, index }) => {
 
     const { mutate, isLoading } = useMutation(deleteTask, {
         onSuccess: data => {
-            console.log(data);
             window.location.reload()
         },
         onError: () => {

@@ -12,7 +12,6 @@ const FormInput = ({ visibleBottom, setVisibleBottom }) => {
 
     const { mutate, isLoading } = useMutation(addTask, {
         onSuccess: data => {
-            console.log(data);
             setVisibleBottom(false)
             window.location.reload();
             // refetch();

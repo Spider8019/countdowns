@@ -31,7 +31,6 @@ const FullscreenPlus = () => {
 
   const { mutate, isLoading } = useMutation(recreateTask, {
     onSuccess: data => {
-      console.log(data);
       navigate("/");
       // refetch();
     },
@@ -39,12 +38,7 @@ const FullscreenPlus = () => {
       alert("there was an error")
     }
   });
-
-  // data
-  //   .slice(1) // remove the header row
-  //   .map((row) => row[1]) // get the sales values
-  //   .reduce((total, value) => total + value, 0) / data.length - 1; // c
-
+ 
   const options = {
     title: "Seconds",
     curveType: "function",

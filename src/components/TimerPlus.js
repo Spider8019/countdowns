@@ -6,7 +6,6 @@ import { useNavigate } from "react-router-dom";
 const TimerGame = ({ title, date, _id, format }) => {
     const secondsWeHaveRef = useRef(null)
     const navigate = useNavigate();
-    console.log(date)
     const secondsWeHave = Math.ceil((Date.now() - date[date.length-1]) / 1000);
     const [timeWeHave, setTimeWeHave] = useState(secondsWeHave);
     useEffect(() => {

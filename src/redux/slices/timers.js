@@ -13,12 +13,9 @@ const timerSlice = createSlice({
     reducers: {},
     extraReducers: {
         [TimerThunks.getTimers.pending]: (state) => {
-            console.log("ASDfa")
             state.isLoading = true;
         },
         [TimerThunks.getTimers.fulfilled]: (state, action) => {
-            console.log("adfals;d")
-            console.log(action, "fulfilled")
             state.isLoading = false;
             state.isError = false;
             state.timers = action.payload;
