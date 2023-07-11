@@ -3,7 +3,6 @@ import TimerPlus from '../components/TimerPlus'
 import { ProgressBar } from 'primereact/progressbar'
 import { useDispatch, useSelector } from 'react-redux'
 import { TimerThunks } from '../redux/thunks/timer'
-import Profile from '../components/cards/Profile'
 import React, { useEffect, useRef } from 'react'
 import { Button } from 'primereact/button'
 import axios from 'axios'
@@ -28,8 +27,7 @@ function Dashboard() {
   // console.log(reqs)
   return (
     <div className="relative">
-      <Profile />
-      <Button
+      {/* <Button
         label="Protected Route"
         onClick={async () => {
           try {
@@ -48,7 +46,7 @@ function Dashboard() {
             console.log(error)
           }
         }}
-      />
+      /> */}
       <div className="App mt-2 px-2" ref={constraintsRef}>
         {[...timers.timers]
           .sort(function (a, b) {
