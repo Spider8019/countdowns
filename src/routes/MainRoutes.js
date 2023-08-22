@@ -7,7 +7,7 @@ import { isTokenExpired } from '../tools'
 
 const MainLayout = () => {
   const { accessToken } = useSelector((state) => state.global)
-
+  console.log(accessToken)
   const PageNotFound = () => {
     return (
       <div
