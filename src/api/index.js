@@ -1,15 +1,11 @@
 import axios from 'axios'
 import { defaults } from './defaultValues'
 
-const callApiAndReturnDataGet = async (DATA, URL, TOKEN) => {
-  console.log(TOKEN, 'AMANPRATAPSINGH')
+const callApiAndReturnDataGet = async (DATA, URL) => {
   const response = await axios({
     method: 'GET',
     url: defaults.baseBackendUrl + URL,
     params: DATA,
-    headers: {
-      authorization: `Bearer ${TOKEN}`,
-    },
   })
   if (response.status === 200) return response.data
   else {
@@ -42,8 +38,11 @@ const callApiAndReturnDataDlt = async (DATA, URL) => {
 }
 
 export const addTask = (obj) => callApiAndReturnDataPost(obj, 'addtask/')
-export const allTask = (obj, token) =>
-  callApiAndReturnDataGet(obj, 'alltask/', token)
+export const allTask = (obj) => callApiAndReturnDataGet(obj, 'alltask/')
+export const allTaskByYou = (obj) =>
+  callApiAndReturnDataGet(obj, 'alltaskbyyou/')
 export const deleteTask = (obj) => callApiAndReturnDataDlt(obj, 'deletetask/')
+export const loginUser = (obj) => callApiAndReturnDataPost(obj, 'login/')
+export const logoutUser = (obj) => callApiAndReturnDataPost(obj, 'logout/')
 export const recreateTask = (obj) =>
   callApiAndReturnDataPost(obj, 'recreatetask/')

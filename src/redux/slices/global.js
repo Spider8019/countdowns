@@ -3,6 +3,7 @@ import { createSlice } from '@reduxjs/toolkit'
 const initialState = {
   format: 'seconds',
   accessToken: null,
+  userPhoneNumber: '',
 }
 
 const globalSlices = createSlice({
@@ -15,10 +16,25 @@ const globalSlices = createSlice({
     },
     setAccessToken: (state, action) => {
       const { payload } = action
-      return { ...state, accessToken: payload.accessToken }
+      return {
+        ...state,
+        accessToken: payload.accessToken,
+        userPhoneNumber: payload.userPhoneNumber,
+      }
+    },
+    removeAccessToken: (state) => {
+      return {
+        ...state,
+        accessToken: null,
+        userPhoneNumber: '',
+      }
     },
   },
 })
 
 export default globalSlices.reducer
-export const { setFormat, setAccessToken } = globalSlices.actions
+export const {
+  setFormat,
+  setAccessToken,
+  removeAccessToken,
+} = globalSlices.actions

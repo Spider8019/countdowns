@@ -4,7 +4,8 @@ import { TimerThunks } from "../thunks/timer";
 const initialState = {
     isLoading: true,
     isError: false,
-    timers: []
+    timers: [],
+    userTimers:[]
 }
 
 const timerSlice = createSlice({
@@ -21,6 +22,18 @@ const timerSlice = createSlice({
             state.timers = action.payload;
         },
         [TimerThunks.getTimers.rejected]: (state, action) => {
+            state.isError = "Fetch Failed";
+            state.isLoading = false;
+        },
+        [TimerThunks.getYourPersonalTimers.pending]: (state) => {
+            state.isLoading = true;
+        },
+        [TimerThunks.getYourPersonalTimers.fulfilled]: (state, action) => {
+            state.isLoading = false;
+            state.isError = false;
+            state.userTimers = action.payload;
+        },
+        [TimerThunks.getYourPersonalTimers.rejected]: (state, action) => {
             state.isError = "Fetch Failed";
             state.isLoading = false;
         }
