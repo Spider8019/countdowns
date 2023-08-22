@@ -8,15 +8,13 @@ import { Divider } from 'primereact/divider'
 
 const Profile = () => {
   const {
-    global: { userPhoneNumber, format },
+    global: { userPhoneNumber, userId, format },
     timers,
   } = useSelector((state) => state)
 
   const dispatch = useDispatch()
   useEffect(() => {
-    dispatch(
-      TimerThunks.getYourPersonalTimers({ phoneNumber: userPhoneNumber }),
-    )
+    dispatch(TimerThunks.getYourPersonalTimers({ userId: userId }))
   }, [])
 
   if (timers.isLoading)
@@ -32,8 +30,8 @@ const Profile = () => {
       </div>
       <Divider />
       <div className="App mt-2 px-2">
-        {[...timers.timers].length > 0 &&
-          [...timers.timers]
+        {[...timers.userTimers].length > 0 &&
+          [...timers.userTimers]
             .sort(function (a, b) {
               return a.date - b.date
             })

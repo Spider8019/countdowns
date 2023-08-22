@@ -3,6 +3,7 @@ import { Sidebar } from 'primereact/sidebar'
 import { addTask } from '../api'
 import { useMutation } from 'react-query'
 import { Button } from 'primereact/button'
+import { useSelector } from 'react-redux'
 
 const FormInput = ({ visibleBottom, setVisibleBottom }) => {
   const [title, setTitle] = useState('')
@@ -10,6 +11,7 @@ const FormInput = ({ visibleBottom, setVisibleBottom }) => {
   const [type, setType] = useState('+')
   const [checked, setChecked] = useState(true)
 
+  const {global:{userId}}=useSelector(state=>state)
   const { mutate, isLoading } = useMutation(addTask, {
     onSuccess: (data) => {
       setVisibleBottom(false)
@@ -21,7 +23,7 @@ const FormInput = ({ visibleBottom, setVisibleBottom }) => {
       alert('there was an error')
     },
   })
-
+console.log("forminpur"+userId)
   return (
     <Sidebar
       blockScroll={true}
@@ -83,6 +85,7 @@ const FormInput = ({ visibleBottom, setVisibleBottom }) => {
               date: [new Date(date).getTime()],
               type,
               checked,
+              createdBy:userId
               // publicTimer: checked
             })
           }

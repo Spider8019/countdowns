@@ -27,6 +27,7 @@ const Login = () => {
             setAccessToken({
               accessToken: data.token,
               userPhoneNumber: data.userPhoneNumber,
+              userId:data.userId
             }),
           )
           navigate('/profile')

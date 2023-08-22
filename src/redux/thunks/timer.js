@@ -8,8 +8,8 @@ const getTimers = createAsyncThunk('timer/getTimers', async () => {
 })
 const getYourPersonalTimers = createAsyncThunk(
   'timer/getTimers',
-  async ({ phoneNumber }) => {
-    const response = await allTaskByYou({ phoneNumber })
+  async ({ userId }) => {
+    const response = await allTaskByYou({ userId })
     console.log(response)
     return response
   },

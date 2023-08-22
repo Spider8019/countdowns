@@ -11,7 +11,6 @@ const TimerGame = ({ title, date, _id, format, index }) => {
   const location = useLocation()
   const secondsLeft = Math.ceil((date[0] - Date.now()) / 1000)
   const [timeLeft, setTimeLeft] = useState(secondsLeft)
-  console.log(location)
   useEffect(() => {
     secondsLeftRef.current = setInterval(() => {
       setTimeLeft((timeLeft) => {
