@@ -7,10 +7,10 @@ const getTimers = createAsyncThunk('timer/getTimers', async () => {
   return response
 })
 const getYourPersonalTimers = createAsyncThunk(
-  'timer/getTimers',
+  'timer/getTimersByYou',
   async ({ userId }) => {
     const response = await allTaskByYou({ userId })
-    console.log(response)
+    console.log(userId)
     return response
   },
 )

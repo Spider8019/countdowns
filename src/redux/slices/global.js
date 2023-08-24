@@ -4,7 +4,7 @@ const initialState = {
   format: 'seconds',
   accessToken: null,
   userPhoneNumber: '',
-  userId:''
+  userId: '',
 }
 
 const globalSlices = createSlice({
@@ -21,7 +21,7 @@ const globalSlices = createSlice({
         ...state,
         accessToken: payload.accessToken,
         userPhoneNumber: payload.userPhoneNumber,
-        userId:payload.userId
+        userId: payload.userId,
       }
     },
     removeAccessToken: (state) => {
@@ -29,6 +29,7 @@ const globalSlices = createSlice({
         ...state,
         accessToken: null,
         userPhoneNumber: '',
+        userId:''
       }
     },
   },

@@ -1,6 +1,6 @@
 import React, { useRef, useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
-import { deleteTask } from '../api'
+import { deleteTask,subscribeTask } from '../api'
 import { useMutation } from 'react-query'
 import { Skeleton } from 'primereact/skeleton'
 import { useNavigate, useLocation } from 'react-router-dom'
@@ -32,6 +32,14 @@ const TimerGame = ({ title, date, _id, format, index }) => {
       alert('there was an error')
     },
   })
+  const { mutate:mutate2, isLoading:isLoading2 } = useMutation(subscribeTask, {
+    onSuccess: (data) => {
+      window.location.reload()
+    },
+    onError: () => {
+      alert('there was an error')
+    },
+  })
 
   return (
     <motion.div className="bg-black p-2 m-2  flex justify-between items-center">
@@ -53,7 +61,15 @@ const TimerGame = ({ title, date, _id, format, index }) => {
             </div>
           </motion.div>
           {location.pathname === '/' ? (
-            <></>
+            <i
+              onClick={() =>
+                mutate2({
+                  _id,
+                })
+              }
+              className="text-gray-800 pi pi-bookmark"
+              aria-label="Subscribe"
+            />
           ) : (
             <i
               onClick={() =>

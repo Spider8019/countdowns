@@ -5,7 +5,8 @@ const initialState = {
     isLoading: true,
     isError: false,
     timers: [],
-    userTimers:[]
+    userTimers:[],
+    subscribedTo:[]
 }
 
 const timerSlice = createSlice({
@@ -15,8 +16,10 @@ const timerSlice = createSlice({
     extraReducers: {
         [TimerThunks.getTimers.pending]: (state) => {
             state.isLoading = true;
+            console.log("Asdfasdfa")
         },
         [TimerThunks.getTimers.fulfilled]: (state, action) => {
+            console.log(action)
             state.isLoading = false;
             state.isError = false;
             state.timers = action.payload;

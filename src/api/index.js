@@ -41,6 +41,8 @@ export const addTask = (obj) => callApiAndReturnDataPost(obj, 'addtask/')
 export const allTask = (obj) => callApiAndReturnDataGet(obj, 'alltask/')
 export const allTaskByYou = (obj) =>
   callApiAndReturnDataGet(obj, 'alltaskbyyou/')
+export const subscribeTask = (obj) =>
+  callApiAndReturnDataPost(obj, 'subscribetask/')
 export const deleteTask = (obj) => callApiAndReturnDataDlt(obj, 'deletetask/')
 export const loginUser = (obj) => callApiAndReturnDataPost(obj, 'login/')
 export const logoutUser = (obj) => callApiAndReturnDataPost(obj, 'logout/')

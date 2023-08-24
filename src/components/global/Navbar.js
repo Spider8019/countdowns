@@ -19,7 +19,7 @@ const Navbar = ({ visibleBottom, setVisibleBottom }) => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const {
-    global: { accessToken, userPhoneNumber },
+    global: { accessToken, userPhoneNumber,format },
   } = useSelector((state) => state)
   const handleLogout = async (e) => {
     e.preventDefault()
@@ -45,7 +45,7 @@ const Navbar = ({ visibleBottom, setVisibleBottom }) => {
               <Button
                 icon="pi pi-arrow-right"
                 label="Login"
-                onClick={() => navigate('/login')}
+                onClick={() => {setVisible(false);navigate('/login')}}
               />
             ) : (
               <>
@@ -83,10 +83,10 @@ const Navbar = ({ visibleBottom, setVisibleBottom }) => {
                   <p
                     className="text-white "
                     onClick={() => {
-                      if (global.format === 'seconds')
+                      setVisible(false);
+                      if (format === 'seconds')
                         dispatch(setFormat({ format: 'hours' }))
                       else dispatch(setFormat({ format: 'seconds' }))
-                      setVisible(false)
                     }}
                   >
                     Change Format

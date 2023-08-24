@@ -21,6 +21,7 @@ const Profile = () => {
     return (
       <ProgressBar mode="indeterminate" style={{ height: '6px' }}></ProgressBar>
     )
+  console.log(timers)
 
   return (
     <div>

@@ -43,7 +43,7 @@ function Dashboard() {
           }
         }}
       /> */}
-      <b className='m-4 block'>All Public Timers</b>
+      <b className='m-4 block'>All Public Timers ({[...timers.timers].length})</b>
       <div className="App mt-2 px-2" ref={constraintsRef}>
         {[...timers.timers].length > 0 &&
           [...timers.timers]
